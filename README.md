@@ -10,4 +10,5 @@ kubectl create deployment rest4test --image=susisacr.azurecr.io/integration/rest
 kubectl expose deployment rest4test --type=ClusterIP --port=8080 --target-port=8080
 
 Patch to Distribute in different AZs
+
 kubectl patch deployment rest4test --type='json' -p='[{"op": "add", "path": "/spec/template/spec/topologySpreadConstraints", "value": [{"maxSkew": 1, "topologyKey": "kubernetes.io/hostname", "whenUnsatisfiable": "DoNotSchedule", "labelSelector": {"matchLabels": {"app": "rest4test"}}}]}]'
